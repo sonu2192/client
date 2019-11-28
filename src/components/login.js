@@ -7,10 +7,20 @@ import background from './background.jpg';
 var st1={
     positon:"relative",
     top:"100px",
-    backgroundColor:"rgba(0,0,0,0.6)"
+    backgroundColor:"rgba(0,0,0,0.6)",
+    paddingTop:"30px"
+}
+var op={
+    opacity:"0.7"
+}
+var sttit={
+    height:"60px",
+}
+var sty={
+    fontFamily:"'Abril Fatface', cursive"
 }
 var act={
-    padding:"10px"
+    lineHeight:"60px"
 }
 var st={
     backgroundImage:`url(${background})`,
@@ -77,9 +87,10 @@ class Login extends Component{
         return(
         <React.Fragment >
               <div className="row" style={st}>
-                  <div className="col s12 l4 offset-l7">
+                  <div className="col s12 l4 offset-l4">
                       <div className="card white-text" style={st1}>
-                          <span className="card-title center-align" style={act}><h3>LOGIN</h3></span>
+                          <div className="center-align indigo" style={sttit}>
+                          <span className="card-title" style={act}>LOGIN</span></div>
                           <div className="card-content center-align">
                           <form action="/Home" onSubmit={this.submitHandler}>
                     <div className="input-field">
@@ -91,7 +102,10 @@ class Login extends Component{
                         <i className="material-icons prefix">lock</i>
                         <input type="password" id="password" required onChange={this.changeText}/>
                         <label htmlFor="password">Password</label>
-                        <button className="btn-floating btn-large waves-effect waves-light blue" type="submit">Login</button> <br/><br/>
+                        <br/><br/><br/>
+                        <button className="btn-small indigo white-text" style={sty} type="submit">Login</button> <br/><br/>
+                        <span className="" style={op}>or</span>
+                        <br/><br/>
                         <Link to="/Register" className="btn-small indigo white-text">SignUp</Link>
                     </div>
                     </form>

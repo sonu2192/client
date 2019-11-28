@@ -36,7 +36,7 @@ class Navbar extends Component{
         <div>
         <nav className="nav-wrapper" style={st}>
             <div className="container">
-            <img src={logo} style={im} className="left" height="100px" width="168px" alt="Not Found"/> <Link to="" className="brand-logo">E-Swasth</Link>
+            <img src={logo} style={im} className="left hide-on-small-only" height="100px" width="168px" alt="Not Found"/> <Link to="" className="brand-logo">E-Swasth</Link>
                 <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                 <ul className="right hide-on-med-and-down">
                     <li><NavLink to="/Home">Home</NavLink></li>
@@ -57,7 +57,7 @@ class Navbar extends Component{
                  <li><NavLink to="/Home">Home</NavLink></li>
                     <li><NavLink to="/FindDoctor">Find Doctor</NavLink></li>
                     <li><NavLink to="/ViewMed">View Medicine</NavLink></li>
-                    <li><NavLink to="/Logout">Logout</NavLink></li>
+                    <li><NavLink to="">Logout</NavLink></li>
             </ul>
             <ul id='dropdown1' className='dropdown-content' >
              <li className="white-text "><Link to="/Account">Account</Link></li>
@@ -74,7 +74,7 @@ class Navbar extends Component{
              <div>
         <nav className="nav-wrapper" style={st}>
             <div className="container">
-            <img src={logo} style={im} className="left" height="100px" width="168px" alt="Not Found"/><Link to="" className="brand-logo">E-Swasth</Link>
+            <img src={logo} style={im} className="left hide-on-small-only" height="100px" width="168px" alt="Not Found"/><Link to="" className="brand-logo">E-Swasth</Link>
                 <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                 <ul className="right hide-on-med-and-down">
                     <li><NavLink to="/Home">Home</NavLink></li>

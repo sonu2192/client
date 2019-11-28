@@ -8,14 +8,18 @@ var st={
     height:"1200px",
     margin:"0px",
   }
+  var sttit={
+    height:"60px",
+}
 var st1={
     positon:"relative",
     top:"100px",
     backgroundColor:"rgba(0,0,0,0.6)",
-    padding:"30px"
+    paddingTop:"30px",
+    paddingBottom:"30px"
 }
 var act={
-    padding:"10px"
+    lineHeight:"60px"
 }
 class PatientRegistration extends Component{
     state={
@@ -70,7 +74,8 @@ class PatientRegistration extends Component{
             <div className="row" style={st}>
                   <div className="col s12 l6 offset-l3">
                       <div className="card white-text" style={st1}>
-                          <span className="card-title center-align" style={act}><h3>SIGNUP</h3></span>
+                      <div className="center-align indigo" style={sttit}>
+                          <span className="card-title" style={act}>SIGNUP</span></div>
                           <div className="card-content">
                           <form action="/" onSubmit={this.submitHandler}>
                     <div className="input-field">
@@ -144,7 +149,8 @@ class PatientRegistration extends Component{
                 <div className="row" style={st}>
                   <div className="col s12 l6 offset-l3">
                       <div className="card white-text" style={st1}>
-                          <span className="card-title center-align" style={act}><h3>SIGNUP</h3></span>
+                      <div className="center-align indigo" style={sttit}>
+                          <span className="card-title" style={act}>SIGNUP</span></div>
                           <div className="card-content">
                           <form action="/" onSubmit={this.submitHandlerDoc}>
                        <div className="input-field">
