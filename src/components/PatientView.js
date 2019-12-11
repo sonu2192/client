@@ -13,7 +13,7 @@ class PatientView extends Component
 {
     state={
         search:'',
-        docName:cookie.load('firstName')+cookie.load('lastName'),
+        docName:cookie.load('fullName'),
         patients:[]
     }
     componentDidMount()
@@ -54,15 +54,11 @@ class PatientView extends Component
         return(
             <div className="section" style={back}>
                 <br/><br/><br/><br/>
-            <span className="btn-floating indigo right darken-1 center-align z-depth-0 white-text" onClick={this.getDoctor}>
-                <i className="material-icons">search</i>
-            </span>
-            <span className="right input-field white-text">
-                <input type="text" name="search" id="search" autoComplete="off" onChange={this.changeText}/>
-                <label htmlFor="search">Search Doctor</label>
-            </span>
             <div className="container">
-            
+            <div className="post card transparent z-depth-2 row" style={{padding:"30px"}}>
+            <input type="texts" id="search" autoComplete="off" style={{borderStyle:"solid",lineHeight:"50px",height:"50px",borderColor:"#4a148c",borderRadius:"40px 0px 0px 40px",outline:"none"}} className="search col s10" name="search" onChange={this.changeText}/>
+            <span className="btn col s2 purple purple darken-4" style={{height:"50px",border:"1.5px",lineHeight:"48px",borderStyle:"solid",borderColor:"#4a148c",borderRadius:"0px 40px 40px 0px"}}><i className="material-icons  center">search</i></span>
+            </div>
             <br/>
             <br/>
             <br/>

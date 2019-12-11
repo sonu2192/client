@@ -26,7 +26,7 @@ class ViewDoc extends Component{
         worksat:'',
         date:'',
         time:'',
-        patientName:cookie.load('firstName')+cookie.load('lastName')
+        patientName:cookie.load('firstName')+" "+cookie.load('lastName')
     }
     componentDidMount(){
      let that=this
@@ -105,10 +105,6 @@ class ViewDoc extends Component{
                       <tr>
                         <td>Name:</td>
                         <td>{this.state.fullName}</td>
-                      </tr>
-                      <tr>
-                        <td>Email:</td>
-                        <td>{this.state.email}</td>
                       </tr>
                       <tr>
                         <td>Specialization:</td>

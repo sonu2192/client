@@ -5,9 +5,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Abril Fatface', cursive;
+  font-family: 'Roboto', sans-serif;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+footer{
+  margin:0px
+}
+.active{
+  color:gray;
+}
+ul{
+  color: black;
+}
+.brand-logo
+{
+  font-family: 'Bebas Neue', cursive;
 }

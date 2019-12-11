@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import cookie from 'react-cookies';
-import logo from './logo.png'
 import background from './background.jpg';
 var st1={
     positon:"relative",
@@ -59,6 +58,7 @@ class Login extends Component{
                         cookie.save('Authenthication','true',{path:'/'});
                         cookie.save('firstName',doctor.data.name.first_name,{path:'/'});
                         cookie.save('lastName',doctor.data.name.last_name,{path:'/'});
+                        cookie.save('fullName',doctor.data.fullName,{path:'/'});
                         window.location.replace("http://localhost:3000/Home");
                         //this.props.history.push("/Home");
                     }
@@ -74,6 +74,7 @@ class Login extends Component{
                 cookie.save('Authenthication','true',{path:'/'}); 
                 cookie.save('firstName',user.data.name.first_name,{path:'/'});
                 cookie.save('lastName',user.data.name.last_name,{path:'/'});
+                cookie.save('fullName',user.data.fullName,{path:'/'});
                 window.location.replace("http://localhost:3000/Home");
             }
         })
@@ -95,12 +96,12 @@ class Login extends Component{
                           <form action="/Home" onSubmit={this.submitHandler}>
                     <div className="input-field">
                         <i className="material-icons prefix">person</i>
-                    <input type="text" id="username" required onChange={this.changeText}/>
+                    <input type="text" id="username" className="white-text" required onChange={this.changeText}/>
                     <label htmlFor="username">Username</label>
                     </div>
                     <div className="input-field">
                         <i className="material-icons prefix">lock</i>
-                        <input type="password" id="password" required onChange={this.changeText}/>
+                        <input type="password" id="password" className="white-text" required onChange={this.changeText}/>
                         <label htmlFor="password">Password</label>
                         <br/><br/><br/>
                         <button className="btn-small indigo white-text" style={sty} type="submit">Login</button> <br/><br/>

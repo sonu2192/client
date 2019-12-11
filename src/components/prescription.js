@@ -1,11 +1,13 @@
 import React,{Component} from 'react';
 import cookie from 'react-cookies';
 import axios from 'axios';
-import texture from './texture.jpg'
+import texture from './texture.jpg';
+import backg from "./back2.jpg";
+var sty={
+    cursor:"pointer"
+}
 var cardback={
-    backgroundImage:`url(${texture})`,
-    backgroundSize:"cover",
-    color:"white"
+    color:"black",
 }
 class Prescription extends Component{
     state={
@@ -16,16 +18,21 @@ class Prescription extends Component{
                  },
         medicines:[],
         patientName:'',
-        doctorName:cookie.load('firstName')+cookie.load('lastName'),
-        date:new Date().getDate()+"-"+(new Date().getMonth()+1)+"-"+new Date().getFullYear()
+        doctorName:cookie.load('fullName'),
+        date:new Date().getDate()+"-"+(new Date().getMonth()+1)+"-"+new Date().getFullYear(),
+        response:null
     }
     componentDidMount()
     {
         axios.get("http://localhost:5000/bookslot/"+this.props.match.params.patient_id)
         .then(res=>{
+            axios.post("http://localhost:5000/medicines/convert")
+              .then(res1=>{
             this.setState({
-                patientName:res.data.patientName
+                patientName:res.data.patientName,
+                p:res1.data
             })
+        })
         })
     }
     changeHandler(e,index){
@@ -34,13 +41,13 @@ class Prescription extends Component{
             medicine:{
             type:document.getElementById('type'+index).value,
             name:document.getElementById('name'+index).value,
-            dosage:document.getElementById('dosage'+index).value
+            dosage:document.getElementById('dosage'+index).value,
             }
          },function(){
             //console.log(this.state);
             this.state.medicines[index]=this.state.medicine
             this.setState({
-                medicines:this.state.medicines
+                medicines:this.state.medicines,
             })
          })
     }
@@ -51,8 +58,8 @@ class Prescription extends Component{
             medicine:{
                 type:'',
                 name:'',
-                price:''
-            }
+                price:'',
+            },
         })
         this.setState({
             medicines:[...this.state.medicines,this.state.medicine]
@@ -77,20 +84,35 @@ class Prescription extends Component{
             medicines:this.state.medicines
         })
     }
+    getelems(index)
+    {
+        if(document.getElementById("name"+index)==null||document.getElementById("name"+index).value=='')
+        {
+        return <div></div>
+        }
+        else if(document.getElementById('name'+index).selected==false)
+        {
+            return <div></div>
+        }
+        else
+        return <div className="collection z-depth-3">{this.state.p.filter(ob=>{return ob.name.toLowerCase().includes(document.getElementById('name'+index).value.toLowerCase())}).map(obj=>{return <div className="collection-item black-text" style={sty} onClick={(e)=>{document.getElementById('name'+index).value=obj.name;document.getElementById('name'+index).selected=false}}>{obj.name}</div>})}</div>
+    }
     render(){
-       // console.log(this.state.medicine);
+
         return(
             <React.Fragment>
+                <div style={{backgroundImage:`url(${backg})`}}>
         <div className="container">
             <br/><br/><br/><br/>
             <form action="">
-            <h2 className="header center-align">Enter Prescription</h2>
-                  <div className="card horizontal z-depth-3 " style={cardback}>
+                  <div className="card horizontal z-depth-1 " style={cardback}>
                   <div className="card-stacked">
+                  <div className="card-title center indigo white-text" style={{font:"algerian",height:"80px",lineHeight:"80px"}}><strong>ENTER PRESCRIPTION</strong></div>
                   <div className="card-content">
+                      
                       <div className="row">
                   <div className="text-field col s2 ">
-                      <input type="text" name="patientName" id="patientName" className="white-text" value={this.state.patientName}/>
+                      <input type="text" name="patientName" id="patientName" required className="black-text" value={this.state.patientName} readOnly/>
                       </div>
                   </div>
         <br/>
@@ -99,16 +121,21 @@ class Prescription extends Component{
                 return(
                     <div className="row" key={index}>
                         <span className="text-field col s3">
-                        <input type="text" name="type" id={"type"+index} className="white-text" onChange={(e)=>this.changeHandler(e,index)}/>
-                        <label htmlFor={"type"+index}>Enter the type of Prescription</label>
+                        <input type="texts" required style={{height:"40px"}} id={"type"+index} className="black-text" onChange={(e)=>this.changeHandler(e,index)}/>
+                        <label htmlFor={"type"+index} className="black-text">Enter the type of Prescription</label>
                         </span>
                         <span className="text-field col s3">
-                        <input type="text" name="name" id={"name"+index} className="white-text" onChange={(e)=>this.changeHandler(e,index)}/>
-                        <label htmlFor={"name"+index}>Enter the name of Prescription</label>
+                        <input type="texts" required style={{height:"40px"}} id={"name"+index} className="black-text" onChange={(e)=>this.changeHandler(e,index)} autoComplete="off"/>
+                        <label htmlFor={"name"+index} className="black-text">Enter the name of Prescription</label>
+                        <div>
+                        {
+                           this.getelems(index)
+                        }
+                        </div>
                         </span>
                         <span className="text-field col s3">
-                        <input type="text" className="white-text" name="dosage" id={"dosage"+index} onChange={(e)=>this.changeHandler(e,index)}/>
-                        <label htmlFor={"dosage"+index}>Enter the dosage</label>
+                        <input type="texts" style={{height:"40px"}} className="black-text" required name="dosage" id={"dosage"+index} onChange={(e)=>this.changeHandler(e,index)}/>
+                        <label htmlFor={"dosage"+index} className="black-text">Enter the dosage</label>
                         </span>
                         <button className="btn small indigo" onClick={(e)=>{this.handleRemove(e,index)}}><i className="material-icons center">delete</i>
                         </button>
@@ -132,6 +159,7 @@ class Prescription extends Component{
         </form>
         <br/>
         <br/><br/><br/>
+        </div>
         </div>
         </React.Fragment>
         

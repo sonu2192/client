@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import axios from 'axios';
 import cookie from 'react-cookies';
 import background from './background.jpg';
+import './Signup.css';
+import {Link} from 'react-router-dom';
 var st={
     backgroundImage:`url(${background})`,
     backgroundSize:"cover",
@@ -31,6 +33,7 @@ class PatientRegistration extends Component{
         gender:'',
         worksat:'',
         number:'',
+        registration_no:'',
         specialization:'',
         type:'patient',
         message:'this is from E-Swasth'
@@ -55,7 +58,7 @@ class PatientRegistration extends Component{
     submitHandlerDoc=(e)=>{
         e.preventDefault();
         console.log(this.state);
-        axios.post('http://localhost:5000/doctors/RegisterDoctor',this.state)
+        axios.post('http://localhost:5000/admin/save',this.state)
         .then(res=>{
             console.log(res);
             this.props.history.push('/');
@@ -80,61 +83,63 @@ class PatientRegistration extends Component{
                           <form action="/" onSubmit={this.submitHandler}>
                     <div className="input-field">
                     <i className="material-icons prefix">person</i>
-                    <input type="text" id="first_name" required onChange={this.changedText}/>
+                    <input type="text" id="first_name" className="white-text" required onChange={this.changedText}/>
                     <label htmlFor="first_name">First Name</label>
                     </div>
                     <div className="input-field">
                     <i className="material-icons prefix">person</i>
-                    <input type="text" id="last_name" required onChange={this.changedText}/>
+                    <input type="text" id="last_name" className="white-text" required onChange={this.changedText}/>
                     <label htmlFor="last_name">Last Name</label>
                     </div>
                     <div>
                     <div className="input-field">
                     <i className="material-icons prefix">person</i>
-                    <input type="text" id="username" required onChange={this.changedText}/>
+                    <input type="text" id="username" className="white-text" required onChange={this.changedText}/>
                     <label htmlFor="username">User Name</label>
                     </div>
                     <label>
-                    <input className="with-gap" id="gender" name="gender" required type="radio" value="male" onChange={this.changedTextRadio}/>
+                    <input className="with-gap" id="gender" name="gender" className="white" required type="radio" value="male" onChange={this.changedTextRadio}/>
                     <span >Male</span>
                     </label>
                     </div>
                     <div>
                     <label>
-                    <input className="with-gap" id="gender1" name="gender" required type="radio"  value="female" onChange={this.changedTextRadio}/>
+                    <input className="with-gap" id="gender1" name="gender" className="white" required type="radio"  value="female" onChange={this.changedTextRadio}/>
                     <span>Female</span>
                     </label>
                     </div>
                     <div className="input-field">
                     <i className="material-icons prefix">message</i>
-                    <input type="tel" id="number" required onChange={this.changedText}/>
+                    <input type="tel" id="number" className="white-text" required onChange={this.changedText}/>
                     <label htmlFor="number">Your Phone Number</label>
                     </div>
                     <div className="input-field">
                     <i className="material-icons prefix">message</i>
-                    <textarea name="" className="materialize-textarea" id="address" cols="30" rows="10" required onChange={this.changedText}></textarea>
+                    <textarea name="" className="materialize-textarea white-text" id="address" cols="30" rows="10" required onChange={this.changedText}></textarea>
                     <label htmlFor="address">Enter address</label>
                     </div>
                     <div className="input-field">
                     <i className="material-icons prefix">lock</i>
-                    <input type="password" id="password" required onChange={this.changedText}/>
+                    <input type="password" id="password" className="white-text" required onChange={this.changedText}/>
                     <label htmlFor="password">Enter the password</label>
                     </div>
                     <div>
                     <label>
-                    <input className="with-gap" id="type" name="type" required type="radio" value="patient" onChange={this.changedTextRadio}/>
+                    <input className="with-gap" id="type" name="type" className="white" required type="radio" value="patient" onChange={this.changedTextRadio}/>
                     <span >Patient</span>
                     </label>
                     </div>
                     <div>
                     <label>
-                    <input className="with-gap" id="type1" name="type" required type="radio"  value="doctor" onChange={this.changedTextRadio}/>
+                    <input className="with-gap" id="type1" name="type" className="white" required type="radio"  value="doctor" onChange={this.changedTextRadio}/>
                     <span>Doctor</span>
                     </label>
                     </div>
                    
                     <br/>
+                    
                     <br/>
+                    <div className="btn-small indigo left"><Link to="/" className="white-text">Go Back</Link></div>
                     <button className="btn-small indigo right" type="submit">Register</button>
                 </form>
                           </div>
@@ -155,44 +160,44 @@ class PatientRegistration extends Component{
                           <form action="/" onSubmit={this.submitHandlerDoc}>
                        <div className="input-field">
                        <i className="material-icons prefix">person</i>
-                       <input type="text" id="first_name" required onChange={this.changedText}/>
+                       <input type="text" id="first_name" className="white-text" required onChange={this.changedText}/>
                        <label htmlFor="first_name">First Name</label>
                        </div>
                        <div className="input-field">
                        <i className="material-icons prefix">person</i>
-                       <input type="text" id="last_name" required onChange={this.changedText}/>
+                       <input type="text" id="last_name" className="white-text" required onChange={this.changedText}/>
                        <label htmlFor="last_name">Last Name</label>
                        </div>
                        <div>
                        <div className="input-field">
                        <i className="material-icons prefix">person</i>
-                       <input type="text" id="username" required onChange={this.changedText}/>
+                       <input type="text" id="username" className="white-text" required onChange={this.changedText}/>
                        <label htmlFor="username">User Name</label>
                        </div>
                        <label>
-                       <input className="with-gap" id="gender" name="gender" required type="radio" value="male" onChange={this.changedTextRadio}/>
+                       <input className="with-gap" id="gender" name="gender" className="white" required type="radio" value="male" onChange={this.changedTextRadio}/>
                        <span >Male</span>
                        </label>
                        </div>
                        <div>
                        <label>
-                       <input className="with-gap" id="gender1" name="gender" required type="radio"  value="female" onChange={this.changedTextRadio}/>
+                       <input className="with-gap" id="gender1" name="gender" className="white" required type="radio"  value="female" onChange={this.changedTextRadio}/>
                        <span>Female</span>
                        </label>
                        </div>
                        <div className="input-field">
                        <i className="material-icons prefix">message</i>
-                       <input type="tel" id="number" required onChange={this.changedText}/>
+                       <input type="tel" id="number" className="white-text" required onChange={this.changedText}/>
                        <label htmlFor="number">Your Phone Number</label>
                        </div>
                        <div className="input-field">
                        <i className="material-icons prefix">message</i>
-                       <textarea name="" className="materialize-textarea" id="address" cols="30" rows="10" required onChange={this.changedText}></textarea>
+                       <textarea name="" className="materialize-textarea white-text" id="address" cols="30" rows="10" required onChange={this.changedText}></textarea>
                        <label htmlFor="address">Enter address</label>
                        </div>
                        <div className="input-field">
                        <i className="material-icons prefix">lock</i>
-                       <input type="password" id="password" required onChange={this.changedText}/>
+                       <input type="password" id="password" className="white-text" required onChange={this.changedText}/>
                        <label htmlFor="password">Enter the password</label>
                        </div>
                        <div>
@@ -203,22 +208,28 @@ class PatientRegistration extends Component{
                        </div>
                        <div>
                        <label>
-                       <input className="with-gap" id="type1" name="type" required type="radio"  value="doctor" onChange={this.changedTextRadio}/>
+                       <input className="with-gap" id="type1" name="type" className="white" required type="radio"  value="doctor" onChange={this.changedTextRadio}/>
                        <span>Doctor</span>
                        </label>
                        </div>
                        <div className="input-field">
+                       <i className="material-icons prefix">person</i>
+                       <input type="text" id="registration_no" className="white-text" required onChange={this.changedText}/>
+                       <label htmlFor="registration_no">Enter Registration Number</label>
+                       </div>
+                       <div className="input-field">
                     <i className="material-icons prefix">person</i>
-                    <input type="text" id="specialization" required onChange={this.changedText}/>
+                    <input type="text" id="specialization" className="white-text" required onChange={this.changedText}/>
                     <label htmlFor="specialization">Specialization</label>
                     </div>
                     <div className="input-field">
                        <i className="material-icons prefix">message</i>
-                       <textarea name="" className="materialize-textarea" id="worksat" cols="30" rows="10" required onChange={this.changedText}></textarea>
+                       <textarea name="" className="materialize-textarea white-text" id="worksat" cols="30" rows="10" required onChange={this.changedText}></textarea>
                        <label htmlFor="worksat">Enter work address</label>
                        </div>
                        <br/>
                        <br/>
+                       <div className="btn-small indigo left"><Link to="/" className="white-text">Go Back</Link></div>
                        <button className="btn-small indigo right" type="submit">Register</button>
                    </form>
                           </div>

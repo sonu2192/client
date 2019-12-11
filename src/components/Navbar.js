@@ -5,8 +5,12 @@ import logo from './logo.png'
 var st={
     position:"fixed",
     top:"0px",
-    backgroundColor:"rgba(0,0,0,0.6)",
+    backgroundColor:"rgba(0,0,0,1)",
     zIndex:"2",
+}
+var styu={
+    position:"relative",
+    left:"-30px"
 }
 var im={
     position:"absolute",
@@ -19,10 +23,10 @@ class Navbar extends Component{
         console.log("Hello");
         const M=window.M;
         var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems,{});
+       var instances = M.Sidenav.init(elems,{});
 
     var elems1 = document.querySelectorAll('.dropdown-trigger');
-    var instances = M.Dropdown.init(elems1,{
+    var instances1 = M.Dropdown.init(elems1,{
         coverTrigger:false,
         hover:true
     });
@@ -36,7 +40,7 @@ class Navbar extends Component{
         <div>
         <nav className="nav-wrapper" style={st}>
             <div className="container">
-            <img src={logo} style={im} className="left hide-on-small-only" height="100px" width="168px" alt="Not Found"/> <Link to="" className="brand-logo">E-Swasth</Link>
+            <img src={logo} style={im} className="left hide-on-small-only" height="100px" width="168px" alt="Not Found"/> <Link to="/Home" className="brand-logo">E-Swasth</Link>
                 <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                 <ul className="right hide-on-med-and-down">
                     <li><NavLink to="/Home">Home</NavLink></li>
@@ -74,10 +78,10 @@ class Navbar extends Component{
              <div>
         <nav className="nav-wrapper" style={st}>
             <div className="container">
-            <img src={logo} style={im} className="left hide-on-small-only" height="100px" width="168px" alt="Not Found"/><Link to="" className="brand-logo">E-Swasth</Link>
+            <img src={logo} style={im} className="left hide-on-small-only" height="100px" width="168px" alt="Not Found"/><Link to="/Home" className="brand-logo">E-Swasth</Link>
                 <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                 <ul className="right hide-on-med-and-down">
-                    <li><NavLink to="/Home">Home</NavLink></li>
+                    <li><NavLink to="/DocHome">Home</NavLink></li>
                     <li><NavLink to="/viewSlots">View Todays Slots</NavLink></li>
                     <li><NavLink to="/FindPatient">Find Patient</NavLink></li>
                     <li> <a className='dropdown-trigger btn-floating red darken-1 center-align z-depth-0' href='#' data-target='dropdown1'>{initials}</a></li>
@@ -97,11 +101,28 @@ class Navbar extends Component{
                     <li><NavLink to="">Logout</NavLink></li>
             </ul>
             <ul id='dropdown1' className='dropdown-content' >
-             <li className="white-text "><Link to="/Account">Account</Link></li>
+             <li className="white-text "><Link to="/DocAccount">Account</Link></li>
              <li className="white-text"><Link to="/Logout">Logout</Link></li>
            </ul>
         </nav>
         </div>
+        )
+    }
+    else if(cookie.load('type')=='admin')
+    {
+        return(
+            <div>
+            <nav className="nav-wrapper" style={st}>
+            <div className="container">
+            <img src={logo} style={im} className="left" height="100px" width="168px" alt="Not Found"/><span className="brand-logo">E-Swasth</span></div>
+            <ul className="right hide-on-med-and-down">
+                <li style={styu}><a className='dropdown-trigger btn-floating silver center-align z-depth-0' href='#' data-target='dropdown1'>A</a></li></ul>
+            <ul id='dropdown1' className='dropdown-content' >
+             <li className="white-text"><Link to="/Logout">Logout</Link></li>
+           </ul>
+                </nav>
+               
+            </div>
         )
     }
     else

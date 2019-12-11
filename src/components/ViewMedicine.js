@@ -2,25 +2,25 @@ import React ,{Component} from 'react';
 import axios from 'axios';
 import cookie from 'react-cookies';
 import { CSVLink, CSVDownload } from "react-csv";
-import background from './background.jpg'
-import med from './medicinesImg.jpg'
+import background from './background.jpg';
+import med from './medicinesImg.jpg';
 var back={
     backgroundImage:`url(${background})`,
     backgroundSize:"cover",
 }
 var backm={
-    backgroundImage:`url(${med})`,
-    backgroundSize:"100% 100%",
-    backgroundRepeat:"no-repeat"
+    border:"0px",
+    padding:"0px"
 }
 var ss={
     backgroundColor:"rgba(255,255,255,0.4)"
 }
 class ViewMedicine extends Component{
     state={
-        patientName:cookie.load('firstName')+cookie.load('lastName'),
+        patientName:cookie.load('firstName')+" "+cookie.load("lastName"),
         medicinesList:[],
-        onlymList:[]
+        onlymList:[],
+        medCost:[],
     }
     componentDidMount(){
         const M=window.M;
@@ -43,7 +43,30 @@ class ViewMedicine extends Component{
             onlymList:list.medicineList
         })
     }
-   
+   addToCart(e,list)
+   {
+       axios.post("http://localhost:5000/medicines/convert")
+       .then(res=>{
+           console.log(list);
+           console.log(res.data);
+           var p=list.map(obj=>{
+               return res.data.filter(ob=>{
+                   return ob.name==obj.name
+               })
+           })
+         this.setState({
+             medCost:p
+         },
+         function(){
+         axios.post("http://localhost:5000/medicines/calculateCost",this.state)
+         .then(res=>{
+             cookie.save('cost',res.data,{path:'/'});
+             window.location.replace('http://localhost:8080');
+         })
+        }
+         )
+       })
+   }
     render()
     {
         const medList=this.state.medicinesList;
@@ -52,10 +75,10 @@ class ViewMedicine extends Component{
                 <br/><br/><br/><br/>
             <div className="container">
             <div id="modal1" className="modal grey lighten-2" style={backm}>
+                <div className="modal-header indigo center white-text" style={{height:"50px"}}><h5 style={{lineHeight:"50px"}}>Prescribed Medicines</h5></div>
                                  <div className="modal-content">
-                                   <h4>Prescribed Medicines</h4>
                                    <table>
-                                       <tr><th>Type</th><th>Name</th><th>Dosage</th></tr>
+                                       <thead><tr><th>Type</th><th>Name</th><th>Dosage</th></tr></thead>   
                                    {
                                        this.state.onlymList.map(medicine=>{
                                            return(
@@ -66,9 +89,10 @@ class ViewMedicine extends Component{
                                    </table>   
                                  </div>
                                  <div className="modal-footer grey lighten-2">
+                                 <div className="btn-small white" onClick={(e)=>{this.addToCart(e,this.state.onlymList)}}><i className="material-icons black-text">shopping_cart</i></div>
                                  <CSVLink data={this.state.onlymList} filename={"medicines.csv"}
-                                className="btn-small indigo primary"
-                                target="_blank">Export</CSVLink>
+                                className="btn-small white"
+                                target="_blank"><i className="material-icons black-text">arrow_downward</i></CSVLink>
                                    <a href="#!" className="modal-close waves-effect waves-green btn-flat">Close</a>
                                  </div>
                                  </div>

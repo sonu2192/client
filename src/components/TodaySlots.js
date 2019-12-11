@@ -1,20 +1,20 @@
 import React,{Component} from 'react';
 import cookie from 'react-cookies';
 import axios from 'axios';
+import back3 from "./back2.jpg";
 var st1={
     backgroundColor:"rgba(0,0,0,0.6)",
-    width:"400px",
     position:"relative",
-    top:"300px",
-    left:"500px"
+    width:"600px",
+    left:"30%",
 }
 var st={
+    backgroundImage:`url(${back3})`,
     margin:"0px",
-    height:"700px"
   }
 class TodaySlots extends Component{
     state={
-        doctor:cookie.load('firstName')+cookie.load('lastName'),
+        doctor:cookie.load('fullName'),
         date:new Date().getDate()+'-'+(new Date().getMonth()+1)+'-'+new Date().getFullYear(),
         slots:[]
     }
@@ -46,9 +46,11 @@ class TodaySlots extends Component{
         ):(<tr><td>No Bookings Today</td></tr>)
         return(
             <div className="section" style={st}>
-                  <div className="col s12 l4 offset-l3">
-                      <div className="card white-text" style={st1}>
-                      <div className="card-content">
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                  <div className="row">
+                      <div className="card black-text" style={st1}>
+                          <div className="card-title center indigo white-text" style={{lineHeight:"50px",height:"50px"}}>Today Slots</div>
+                      <div className="card-content white" style={{padding:"30px"}}>
            <table className="centered">
                
                 <thead><tr><th>Patient</th><th>Time</th></tr></thead>
@@ -59,6 +61,7 @@ class TodaySlots extends Component{
             </div>
             </div>
             </div>
+            <br/><br/>
             </div>
         )
     }

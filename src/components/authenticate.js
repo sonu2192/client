@@ -1,13 +1,22 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import cookie from 'react-cookies';
+import background from './background.jpg';
 var height={
-    height:'300px'
+    height:'300px',
+    backgroundColor:"rgba(0,0,0,0.4)"
 }
 var position={
     position:'relative',
     left:'300px'
 }
+var capback={
+    backgroundImage:`url(${background})`,
+    backgroundSize:"cover",
+    height:"700px",
+    margin:"0px",
+    width:"100%"
+  }
 class Authenticate extends Component
 {
     state={
@@ -22,6 +31,9 @@ class Authenticate extends Component
         this.setState({
             [e.target.name]:e.target.value
         })
+    }
+    reSend=(e)=>{
+        axios.post("http://localhost:5000/getotp/send",cookie.load('detals'))
     }
     submitHandler=(e)=>{
         e.preventDefault();
@@ -51,18 +63,23 @@ class Authenticate extends Component
     render()
     {
         return(
+            <div style={capback}>
             <div className="container">
+                <br/><br/><br/><br/>
                 <div className="card" style={height}>
                 <div className="row">
                     <br/>
                     <br/>
                     <br/>
                     <br/>
-                    <div className="col s5 center" style={position}>
+                    <div className="col s5 center" style={position} >
                 <form action="" onSubmit={this.submitHandler}>
-                    <input type="tel" className="text-field" placeholder="Enter the number" name="resAuth" onChange={this.changeHandler} autoComplete="off"/>
-                    <button type="submit">Verify</button>
+                    <input type="tel" className="text-field black-text" placeholder="Enter the number" name="resAuth" onChange={this.changeHandler} autoComplete="off"/>
+                    <button className="btn-small indigo" type="submit">Verify</button>
                 </form>
+                <br/><br/>
+                <div className="btn-small indigo" onClick={this.reSend}>reSend</div>
+                </div>
                 </div>
                 </div>
                 </div>

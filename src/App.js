@@ -15,6 +15,10 @@ import Logout from './components/Logout';
 import Account from './components/Account';
 import DocHome from './components/DocHome';
 import Authenticate from './components/authenticate';
+import AdminAccept from './components/AdminView';
+import adDocView from './components/AdDocView';
+import AdminLogin from './components/AdminLogin';
+import Doc from './components/DocAccount';
 class App extends Component{
   render(){
     //console.log(this.state.Authentication);
@@ -23,6 +27,7 @@ class App extends Component{
       <div className="App">
         <Navbar Authentication />
         <Route exact path='/' component={Login}/>
+        <Route path='/AdminLogin' component={AdminLogin}/>
         <Route path='/Register' component={PatientRegistration}/>
         <Route path='/Home' component={Home}/>
         <Route path='/ViewMed' component={ViewMedicine}/>
@@ -36,6 +41,9 @@ class App extends Component{
         <Route path="/Logout" component={Logout}/>
         <Route path="/Auth" component={Authenticate}/>
         <Route path="/DocHome" component={DocHome}/>
+        <Route path="/adminAccept" component={AdminAccept}/>
+        <Route path="/admin/:doc_id" component={adDocView}/>
+        <Route path="/DocAccount" component={Doc}/>
         <Footer/>
       </div>
       </BrowserRouter>
